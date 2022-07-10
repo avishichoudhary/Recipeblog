@@ -13,3 +13,4 @@ db.once('open',function(){
 //Model
 
 require=('./Category');
+require=('./Recipe');

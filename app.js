@@ -1,24 +1,20 @@
-const express=require("express");
-const expressLayouts= require('express-ejs-layouts');
+const express = require('express');
+const expressLayouts = require('express-ejs-layouts');
 
-const app=express();
-const port= process.env.PORT||3000;
+
+const app = express();
+const port = process.env.PORT || 3000;
 
 require('dotenv').config();
 
-app.use(express.urlencoded({extended: true}));
-
+app.use(express.urlencoded( { extended: true } ));
 app.use(express.static('public'));
-
 app.use(expressLayouts);
 
-app.set('layout','./layouts/main');
+app.set('layout', './layouts/main');
+app.set('view engine', 'ejs');
 
-app.set('view engine','ejs');
+const routes = require('./server/routes/recipe.js')
+app.use('/', routes);
 
-const routes =require('./server/routes/recipe.js')
-
-app.use('/',routes);
-
-app.listen(port,()=>console.log(`Listing to the port ${port}`));
-
+app.listen(port, ()=> console.log(`Listening to port ${port}`));
